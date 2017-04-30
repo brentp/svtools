@@ -625,11 +625,15 @@ def command_parser():
     return parser
 
 def run_from_args(args):
-    l_cluster_by_line(args.inFile,
-            percent_slop=args.percent_slop,
-            fixed_slop=args.fixed_slop,
-            use_product=args.use_product,
-            include_genotypes=args.include_genotypes)
+    try:
+        l_cluster_by_line(args.inFile,
+                percent_slop=args.percent_slop,
+                fixed_slop=args.fixed_slop,
+                use_product=args.use_product,
+                include_genotypes=args.include_genotypes)
+    except:
+        print >>sys.stderr, ("error with file: %s" % args.inFile)
+        raise
 
 if __name__ == "__main__":
     parser = command_parser()
